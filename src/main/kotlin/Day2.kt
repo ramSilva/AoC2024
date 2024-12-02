@@ -1,7 +1,6 @@
 package org.example
 
 import java.io.File
-import kotlin.math.abs
 
 private val lines = File("input/day2/input.txt").readLines()
 fun puzzle2(): Int {
@@ -29,8 +28,8 @@ fun puzzle2dot1(): Int {
 private fun isSafe(list: List<Int>): Boolean {
     val windows = list.windowed(2, 1)
     return windows.all {
-        (abs(it[0] - it[1]) in 1..3) && it[0] > it[1]
+        it[0] - it[1] in 1..3
     } || windows.all {
-        (abs(it[0] - it[1]) in 1..3) && it[0] < it[1]
+        it[0] - it[1] in -3..-1
     }
 }
