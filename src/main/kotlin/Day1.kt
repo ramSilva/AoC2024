@@ -32,10 +32,7 @@ fun puzzle1dot1(): Int {
         l2.add(split[1].toInt())
     }
 
-    var sum = 0
-    l1.forEach { n1 ->
-        sum += n1 * l2.count { n2 -> n2 == n1 }
+    return l1.sumOf { n1 ->
+        n1 * l2.count { n2 -> n2 == n1 }
     }
-
-    return sum
 }
