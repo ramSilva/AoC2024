@@ -11,6 +11,23 @@ fun puzzle3(): Int {
     }
 }
 
+fun puzzle3dot1(): Int {
+    return lines.sumOf {
+        val dos = "do\\(\\)".toRegex().findAll(it)
+        val donts = "don't\\(\\)".toRegex().findAll(it)
+
+        "mul\\((\\d{1,3}),(\\d{1,3})\\)".toRegex().findAll(it).sumOf { numberMatch ->
+            val previousDo = dos.lastOrNull { numberMatch.range.first > it.range.first }
+            val previousDont = donts.lastOrNull { numberMatch.range.first > it.range.first }
+
+            if((previousDo?.range?.first ?: 0) >= (previousDont?.range?.first ?: 0))
+                numberMatch.groups[1]!!.value.toInt() * numberMatch.groups[2]!!.value.toInt()
+            else
+                0
+        }
+    }
+}
+
 fun puzzle3dot2(): Int {
     var enabled = true
     return lines.sumOf {
@@ -28,7 +45,7 @@ fun puzzle3dot2(): Int {
                 return@inner it.groups[1]!!.value.toInt() * it.groups[2]!!.value.toInt()
             }
 
-            0
+            0.toInt()
         }
     }
 }
