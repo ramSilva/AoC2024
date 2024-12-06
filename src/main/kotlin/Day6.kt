@@ -61,7 +61,7 @@ fun puzzle6(): Int {
 }
 
 fun puzzle6dot1(): Int {
-    val obstacles = mutableListOf<Pair<Int, Int>>()
+    val obstacles = mutableMapOf<Pair<Int, Int>, Boolean>()
     var ogvisited = mutableSetOf<Pair<Int, Int>>()
     var mapDimensionX = -1
     var mapDimensionY = -1
@@ -79,7 +79,7 @@ fun puzzle6dot1(): Int {
             if (x > mapDimensionX) mapDimensionX = x
             val checkingPosition = Pair(x, y)
             when (c) {
-                '#' -> obstacles.add(checkingPosition)
+                '#' -> obstacles[checkingPosition] = true
                 '^' -> {
                     originalPosition = checkingPosition
                     currentPosition = originalPosition
@@ -126,8 +126,8 @@ fun puzzle6dot1(): Int {
         currentDirectionIndex = 0
         currentDirection = directions[currentDirectionIndex]
 
-        obstacles.add(obstaclePos)
-        val visited = mutableListOf<Pair<Pair<Int, Int>, Pair<Int, Int>>>() // position/direction
+        obstacles[obstaclePos] = true
+        val visited = mutableMapOf<Pair<Pair<Int, Int>, Pair<Int, Int>>, Boolean>()
 
         while (true) {
             if (visited.contains(Pair(currentPosition, currentDirection))) {
@@ -135,7 +135,7 @@ fun puzzle6dot1(): Int {
                 break
             }
 
-            visited.add(Pair(currentPosition, currentDirection))
+            visited[Pair(currentPosition, currentDirection)] = true
 
             var nextPosition = Pair(
                 currentPosition.first + currentDirection.first,
