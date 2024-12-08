@@ -3,6 +3,6 @@ package org.example
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    println(puzzle7())
-    println(puzzle6dot1())
+    println(puzzle8())
+    println(puzzle8dot1())
 }
